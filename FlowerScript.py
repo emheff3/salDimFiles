@@ -19,6 +19,15 @@ def getRand():
     letters = [a,b,c,d]
     return letters
 
+#Change the dimensions specified in dims
+def changeN(dims,img):
+    for a in dims:
+        if(img[a]==1):
+           img[a]=9
+        else:
+            img[a]=1
+    return
+
 #No change
 for i in range(8):
     ind = getRand()
@@ -39,14 +48,12 @@ for i in range(4):
     for j in range(8):
         ind = getRand()
         fileOne = "flower1_" + str(ind[0]) + str(ind[1]) + str(ind[2]) + str(ind[3]) + "_1.png"
-        while fileOne in data[i*4:i*4+j,i] or fileOne in data[i*4:i*4+j,i]: 
+        while fileOne in data[(8+i*8):(8+i*8+j),0] or fileOne in data[(8+i*8):(8+i*8+j),1]: 
             ind = getRand()
             fileOne = "flower1_" + str(ind[0]) + str(ind[1]) + str(ind[2]) + str(ind[3]) + "_1.png"
             countDoubles+=1
-        if (ind[i]==1):
-            ind[i]=9
-        else:
-            ind[i]=1
+        dims = [i]
+        changeN(dims, ind)
         fileTwo = "flower1_" + str(ind[0]) + str(ind[1]) + str(ind[2]) + str(ind[3]) + "_1.png"
         tmp[0,0] = fileOne
         tmp[0,1] = fileTwo
